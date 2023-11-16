@@ -497,7 +497,380 @@ for (let td of tdsw) {
 
 
 // n21/1-5
+let bd = document.querySelector('.n21');
+let elements = ['Элемент 1', 'Элемент 2', 'Элемент 3', 'Элемент 4'];
+
+for (let i = 0; i < 1; i++) {
+    let ul = document.createElement('ul');
+
+    for (let elem of elements) {
+        let li = document.createElement('li');
+
+        li.textContent = elem;
+        ul.appendChild(li);
+    }
+
+    bd.appendChild(ul);
+
+	let lis = document.querySelectorAll('.n21 li');
+
+	for (let li of lis) {
+		let span = document.createElement('span');
+		span.textContent = li.textContent;
+		li.textContent = '';
+		li.appendChild(span)
+
+	    let remove = document.createElement('a');
+	    remove.href = '';
+	    remove.textContent = 'remove';
+
+	    li.appendChild(remove);
+
+	    remove.addEventListener('click', function(event) {
+	        li.remove(); 
+	        event.preventDefault();
+	    });
+
+		let crs = document.createElement('p');
+		
+		crs.textContent = 'перечеркнуть';
+		li.appendChild(crs);
+	
+		crs.addEventListener('click', function() {
+			span.style.textDecoration = 'line-through';
+			crs.remove(); 
+		});
+	}
+
+	let lispan = document.querySelectorAll('.n21 li span');
+
+	for (let li of lispan) {
+		li.addEventListener('click', function func() {
+			let input = document.createElement('input');
+			input.value = li.textContent;
+			
+			li.textContent = '';
+			li.appendChild(input);
+			
+			input.addEventListener('blur', function() {
+				li.textContent = this.value;
+				li.addEventListener('click', func);
+			});
+	
+			li.removeEventListener('click', func);
+		});
+	}
+
+	let input = document.createElement('input');
+    input.placeholder = 'Введите новый элемент';
+
+	input.addEventListener('blur', function() {
+		let li = document.createElement('li');
+		li.classList.add('newli');
+
+        li.textContent = input.value;
+        ul.appendChild(li);
+
+		let lisnew = document.querySelectorAll('.newli');
+
+		for (let li of lisnew) {
+			let span = document.createElement('span');
+			span.textContent = li.textContent;
+			li.textContent = '';
+			li.appendChild(span)
+	
+			let remove = document.createElement('a');
+			remove.href = '';
+			remove.textContent = 'remove';
+	
+			li.appendChild(remove);
+	
+			remove.addEventListener('click', function(event) {
+				li.remove(); 
+				event.preventDefault();
+			});
+	
+			let crs = document.createElement('p');
+			
+			crs.textContent = 'перечеркнуть';
+			li.appendChild(crs);
+		
+			crs.addEventListener('click', function() {
+				span.style.textDecoration = 'line-through';
+				crs.remove(); 
+			});
+		}
+	
+		let newlispan = document.querySelectorAll('.newli span');
+	
+		for (let li of newlispan) {
+			li.addEventListener('click', function func() {
+				let input = document.createElement('input');
+				input.value = li.textContent;
+				
+				li.textContent = '';
+				li.appendChild(input);
+				
+				input.addEventListener('blur', function() {
+					li.textContent = this.value;
+					li.addEventListener('click', func);
+				});
+		
+				li.removeEventListener('click', func);
+			});
+		}
+		
+		// let elem = document.querySelector('.n21 li')
+		// let clone = elem.cloneNode(true);
+        // ul.appendChild(clone);
+
+		// let cloneli = document.querySelector('.n21 li:last-child span')
+		// cloneli.textContent = input.value;
+
+		//либо добавлять значени валуе инпута в массив...
+		//либо повторять код выше с другими переменными и элементами...
+		//либо обернуть код выше в функцию и применять её к добавленным элментам...
+    });
+
+    bd.appendChild(input);
+}
+
+
 
 // n21/6-9
+let table11 = document.querySelector('.tablexvc');
+let usersx = [
+	{name: 'employee1', age: 30, salary: 400},
+	{name: 'employee2', age: 31, salary: 500},
+	{name: 'employee3', age: 32, salary: 600},
+];
+
+for (let user of usersx) {
+	let tr = document.createElement('tr');
+	
+	let td1 = document.createElement('td');
+	td1.textContent = user.name;
+	tr.appendChild(td1);
+	
+	let td2 = document.createElement('td');
+	td2.textContent = user.age;
+	tr.appendChild(td2);
+	
+	let td3 = document.createElement('td');
+	td3.textContent = user.salary;
+	tr.appendChild(td3);
+	
+	table11.appendChild(tr);
+}
+
+let tds = document.querySelectorAll('.n21-2 td');
+
+for (let td of tds) {
+	td.addEventListener('click', function func() {
+		let input = document.createElement('input');
+		input.value = td.textContent;
+		
+		td.textContent = '';
+		td.appendChild(input);
+		
+		input.addEventListener('blur', function() {
+			td.textContent = this.value;
+			td.addEventListener('click', func);
+		});
+
+		td.removeEventListener('click', func);
+	});
+}
+
+let trs2 = document.querySelectorAll('.n21-2 tr');
+
+for (let tr of trs2) {
+	let remove = document.createElement('a');
+	remove.href = '';
+	remove.textContent = 'remove';
+
+	tr.appendChild(remove);
+
+	remove.addEventListener('click', function(event) {
+		tr.remove(); 
+		event.preventDefault();
+	});
+}
+
+let tablecln = document.querySelector('.n21-2');
+
+let inputs = document.createElement('input');
+inputs.placeholder = 'Введите имя работника';
+tablecln.appendChild(inputs);
+
+let inputa = document.createElement('input');
+inputa.placeholder = 'Введите возраст работника';
+tablecln.appendChild(inputa);
+
+let inputp = document.createElement('input');
+inputp.placeholder = 'Введите зарплату работника';
+tablecln.appendChild(inputp);
+
+let btnx = document.createElement('button');
+btnx.textContent = 'Добавить работника';
+tablecln.appendChild(btnx);
+
+btnx.addEventListener('click', function() {
+	let tr = document.createElement('tr');
+	
+	let td1 = document.createElement('td');
+	td1.textContent = inputs.value;
+	td1.classList.add('new');
+	tr.appendChild(td1);
+	
+	let td2 = document.createElement('td');
+	td2.textContent = inputa.value;
+	td2.classList.add('new');
+	tr.appendChild(td2);
+	
+	let td3 = document.createElement('td');
+	td3.textContent = inputp.value;
+	td3.classList.add('new');
+	tr.appendChild(td3);
+	
+	table11.appendChild(tr);
+
+	let tdsnew = document.querySelectorAll('.new');
+
+	for (let td of tdsnew) {
+		td.addEventListener('click', function func() {
+			let input = document.createElement('input');
+			input.value = td.textContent;
+
+			td.textContent = '';
+			td.appendChild(input);
+
+			input.addEventListener('blur', function() {
+				td.textContent = this.value;
+				td.addEventListener('click', func);
+			});
+
+			td.removeEventListener('click', func);
+		});
+	}
+});
+
+
 
 // n21/10-13
+let table12 = document.querySelector('.tablexvb');
+let usersv = [
+	{name: 'employee1', age: 30, salary: 400},
+	{name: 'employee2', age: 31, salary: 500},
+	{name: 'employee3', age: 32, salary: 600},
+];
+
+for (let user of usersv) {
+	let tr = document.createElement('ul');
+	
+	let td1 = document.createElement('li');
+	td1.textContent = user.name;
+	tr.appendChild(td1);
+	
+	let td2 = document.createElement('li');
+	td2.textContent = user.age;
+	tr.appendChild(td2);
+	
+	let td3 = document.createElement('li');
+	td3.textContent = user.salary;
+	tr.appendChild(td3);
+	
+	table12.appendChild(tr);
+}
+
+let tdsb = document.querySelectorAll('.tablexvb li');
+
+for (let td of tdsb) {
+	td.addEventListener('click', function func() {
+		let input = document.createElement('input');
+		input.value = td.textContent;
+		
+		td.textContent = '';
+		td.appendChild(input);
+		
+		input.addEventListener('blur', function() {
+			td.textContent = this.value;
+			td.addEventListener('click', func);
+		});
+
+		td.removeEventListener('click', func);
+	});
+}
+
+let tdli = document.querySelectorAll('.tablexvb ul');
+
+for (let ul of tdli) {
+	let remove = document.createElement('a');
+	remove.href = '';
+	remove.textContent = 'remove';
+
+	ul.appendChild(remove);
+
+	remove.addEventListener('click', function(event) {
+		ul.remove(); 
+		event.preventDefault();
+	});
+}
+
+let tablemm = document.querySelector('.n21-3');
+
+let inputs1 = document.createElement('input');
+inputs1.placeholder = 'Введите имя работника';
+tablemm.appendChild(inputs1);
+
+let inputa1 = document.createElement('input');
+inputa1.placeholder = 'Введите возраст работника';
+tablemm.appendChild(inputa1);
+
+let inputp1 = document.createElement('input');
+inputp1.placeholder = 'Введите зарплату работника';
+tablemm.appendChild(inputp1);
+
+let btnx1 = document.createElement('button');
+btnx1.textContent = 'Добавить работника';
+tablemm.appendChild(btnx1);
+
+btnx1.addEventListener('click', function() {
+	let ul = document.createElement('ul');
+	
+	let td1 = document.createElement('li');
+	td1.textContent = inputs1.value;
+	td1.classList.add('new1');
+	ul.appendChild(td1);
+	
+	let td2 = document.createElement('li');
+	td2.textContent = inputa1.value;
+	td2.classList.add('new1');
+	ul.appendChild(td2);
+	
+	let td3 = document.createElement('li');
+	td3.textContent = inputp1.value;
+	td3.classList.add('new1');
+	ul.appendChild(td3);
+	
+	table12.appendChild(ul);
+
+	let tdsnew1 = document.querySelectorAll('.new1');
+
+	for (let td of tdsnew1) {
+		td.addEventListener('click', function func() {
+			let input = document.createElement('input');
+			input.value = td.textContent;
+
+			td.textContent = '';
+			td.appendChild(input);
+
+			input.addEventListener('blur', function() {
+				td.textContent = this.value;
+				td.addEventListener('click', func);
+			});
+
+			td.removeEventListener('click', func);
+		});
+	}
+});
